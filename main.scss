@@ -1,9 +1,23 @@
 $background: (
     primary: #000,
-    links:  #dbdbdb
+    links:  #fff,
+    projects: #dbdbdb
 );
 
+$desktop: 728px;
+$xlTablet: 900px;
 
+@mixin desktop {
+    @media (max-width: #{$desktop}) {
+        @content   
+    }
+}
+
+@mixin xlTablet {
+    @media (max-width: #{$xlTablet}){
+        @content
+    }
+}
 
 *{
     margin: 0;
@@ -13,36 +27,64 @@ $background: (
 
 body{
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: fit-content(15%) auto;
     grid-template-rows: auto;
     grid-template-areas: 
         "aboutMe projects "
     ;
     font-family: 'Montserrat', sans-serif;
+
+    @include desktop{
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+            "aboutMe"
+            "projects"    
+    }
 }
 
 //BODY GRID CELLS 
 
 .aboutMe{
     grid-area: aboutMe;
-    background-color: map-get($map: $background, $key: primary);
+    background-color: map-get($background, primary);
     height: 100vh;
     position: sticky;
     top: 0;
     display: flex;
     flex-direction: column;
 
-    img{
-        margin: 2rem 0 0 1rem;
-        width: 85%;
+
+    @include desktop{
+        position: relative;
+        height: auto;
     }
 
+    img{
+        margin: 2rem auto;
+        width: 90%;
+        max-width: 250px;
+    }
+
+
     .bio{
-        margin: 2rem 2rem 0 1rem;
+        margin: 0 auto 0 auto;
         color: white;
         font-size: 16px;
         line-height: 1.5em;
         flex: 2;
+        width: 85%;
+        margin: 0 auto 2rem auto;
+
+        @include desktop{
+            width: 80%;
+            margin: 0 auto 2rem auto;
+            text-align: center;
+        }
+
+        @include xlTablet{
+            font-size: 14px;
+        }
 
         .html{
             color:#e44d26;
@@ -67,16 +109,24 @@ body{
         background-color: map-get($map: $background, $key: links );
         padding: 1rem;
         width: 100%;
+
+        @include desktop{
+            padding: 0 auto 2rem auto;
+            text-align: center;
+        }
+
+        @include xlTablet{
+            font-size: 14px;
+        }
+
         img{
             margin: 1rem 1rem 0 0;
             width: 48px;
         }
-    
         span{
             font-weight: bold;
         }
     }
-
 }
 
 
@@ -84,11 +134,28 @@ body{
 .projects{
     grid-area: projects;
     display: flex;
-    width: 90%;
-    margin: 0 auto;
     flex-direction: column;
     justify-content: center;
     height: auto;
+    background-color: map-get( $background, projects);
+
+        section{
+            width: 90%;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+
+            img{
+                width: 80%;
+                margin: 2rem auto;
+            }
+
+            p{
+                font-weight: 300;
+            }
+        }
 }
 
 header{
@@ -106,77 +173,27 @@ header{
 }
 
 .cloutChasers{
-    width: 100%;
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    img{
-        width: 80%;
-        margin: 2rem auto;
-    }
     h2{
-        font-size: 24px;
+        font-size: calc(16px + 1vw);
         color: 	#4ec4ca;
     }   
-    p{
-        font-weight: 300;
-    }
-
 }
 
 .honeyDipped{
-    width: 100%;
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    img{
-        width: 80%;
-        margin: 2rem auto;
-    }
     h2{
         font-size: 24px;
         color:#fca82a;
     }   
-    p{
-        font-weight: 300;
-    }
-
 }
 
 .jdPhoto{
-    width: 100%;
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    img{
-        width: 80%;
-        margin: 2rem auto;
-    }
     h2{
         font-size: 24px;
         color:#265a17;
     }   
     p{
-        font-weight: 300;
         margin-bottom: 2rem;
     }
 
 }
 
-
-@include breakpoint(max-width 728px){
-    .aboutMe{
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        grid-template-areas: 
-            "aboutMe"
-            "projects"
-        ;
-    }       
-}
