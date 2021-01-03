@@ -148,14 +148,53 @@ body{
             text-align: center;
 
             img{
-                width: 80%;
-                margin: 2rem auto;
+                width: 100%;
+                position: relative;
             }
 
             p{
                 font-weight: 300;
             }
         }
+}
+
+.img-cont{
+    position: relative;
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    transition: .5s ease;
+    background-color: #4ec4ca;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.overlay:hover{
+    opacity: .75;    
+}
+
+.text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    white-space: nowrap;
+
+    a{
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+        padding: 200px;
+    }
 }
 
 header{
